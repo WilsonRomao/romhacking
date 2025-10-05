@@ -2,8 +2,10 @@
 import os
 import json
 # Arquivo da ROM que vamos analisar
-diretory = os.getcwd()
-rom_file = diretory + '//SMario.sfc'
+diretory = os.path.dirname(os.getcwd())
+
+rom_file = os.path.join(diretory, 'SMario.sfc')
+dicionario_file = os.path.join(diretory,'dados','dicionario.json')
 
 # A palavra que queremos encontrar. Você pode mudar esta variável.
 search_word = input("Pesquise a expressão:")
@@ -15,7 +17,7 @@ search_word = input("Pesquise a expressão:")
 # Carrega o dicionário base (hex -> char) do arquivo JSON
 hex_to_char = {}
 try:
-    with open(diretory+'\\dicionario.json', 'r') as f:
+    with open(dicionario_file, 'r') as f:
         data = json.load(f)
     # Converte as chaves do JSON (que são texto) para números hexadecimais
     hex_to_char = {int(key, 16): value for key, value in data['hex_to_char'].items()}
